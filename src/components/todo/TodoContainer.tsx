@@ -11,7 +11,6 @@ const TodoContainer = () => {
     return <p>Loading</p>;
   }
 
-  console.log(data);
   return (
     <div>
       <div className="flex justify-between gap-2 mb-5">
@@ -20,7 +19,7 @@ const TodoContainer = () => {
       </div>
       <div className="bg-primary-gradient h-full rounded-xl p-1 ">
         <div className="bg-white p-5 w-full h-full space-y-3 rounded-lg">
-          {todos.map((todo) => (
+          {data.data.map((todo) => (
             <TodoCard {...todo} />
           ))}
         </div>
