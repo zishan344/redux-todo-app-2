@@ -1,4 +1,4 @@
-import { useDeleteTodoMutation } from "@/redux/api/api";
+import { useDeleteTodoMutation, useUpdateTodoMutation } from "@/redux/api/api";
 import { removeTodo, toggleComplete } from "@/redux/features/todoSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { DeleteIcon, Edit } from "lucide-react";
@@ -20,20 +20,30 @@ const TodoCard = ({
 }: TTodoCard) => {
   const [deleteTodo, { isLoading, isError, isSuccess }] =
     useDeleteTodoMutation();
+  const [updateTodo] = useUpdateTodoMutation();
   const dispatch = useAppDispatch();
   const handleDelete = (id: string) => {
-    console.log(id);
     deleteTodo(id);
   };
   const handleToggled = (id: string) => {
-    dispatch(toggleComplete(id));
+    const option = {
+      id,
+      data: {
+        title,
+        description,
+        isCompleted: !isComplete,
+        priority,
+      },
+    };
+    updateTodo(option);
   };
   return (
     <div className="bg-white rounded-md flex justify-items-center  gap-2 items-center justify-between p-2 border ">
       <input
-        onClick={() => handleToggled(id)}
+        onClick={() => handleToggled(_id)}
         className="mr-4"
         type="checkbox"
+        defaultChecked={isComplete}
       />
       <p className="flex-1 font-semibold">{title}</p>
       <div className="flex-1 flex gap-2 items-center">

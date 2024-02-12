@@ -30,7 +30,6 @@ const AddTodoModal = () => {
   const [addTodo, { isLoading, isError, isSuccess }] = useAddTodoMutation();
 
   //! const dispatch = useAppDispatch();
-  console.log({ isLoading, isError, isSuccess });
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log({ task, description });
