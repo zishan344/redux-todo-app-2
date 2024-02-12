@@ -10,7 +10,7 @@ const TodoContainer = () => {
   if (isLoading) {
     return <p>Loading</p>;
   }
-
+  console.log(data);
   return (
     <div>
       <div className="flex justify-between gap-2 mb-5">

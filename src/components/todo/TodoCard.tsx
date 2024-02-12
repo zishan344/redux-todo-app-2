@@ -1,9 +1,10 @@
+import { useDeleteTodoMutation } from "@/redux/api/api";
 import { removeTodo, toggleComplete } from "@/redux/features/todoSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { DeleteIcon, Edit } from "lucide-react";
 
 type TTodoCard = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   isCompleted: string;
@@ -11,15 +12,18 @@ type TTodoCard = {
 };
 
 const TodoCard = ({
-  id,
+  _id,
   title,
   description,
   isCompleted: isComplete,
   priority,
 }: TTodoCard) => {
+  const [deleteTodo, { isLoading, isError, isSuccess }] =
+    useDeleteTodoMutation();
   const dispatch = useAppDispatch();
   const handleDelete = (id: string) => {
-    dispatch(removeTodo(id));
+    console.log(id);
+    deleteTodo(id);
   };
   const handleToggled = (id: string) => {
     dispatch(toggleComplete(id));
@@ -51,7 +55,7 @@ const TodoCard = ({
       </div>
       <p className="flex-[2]">{description}</p>
       <div className="space-x-3">
-        <button onClick={() => handleDelete(id)}>
+        <button onClick={() => handleDelete(_id)}>
           <DeleteIcon />
         </button>
         <button>
